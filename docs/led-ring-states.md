@@ -37,6 +37,23 @@ event, and the outcome for each. Entries are tagged:
 
 ---
 
+## 1b. Where the LEDs are (Echo Dot 2, biscuit)
+
+Measured on a Dot by lighting one LED at a time (2026-10-18). The 12 LEDs sit
+on the hour marks, 30 degrees apart. Hardware LED 0 is at 8 o'clock and the
+indices run clockwise, so LED 4 is at 12 o'clock, directly above the Volume Up
+button, and LED 10 is at 6 o'clock. Firmware code that takes an angle already
+agrees: `ledOffset = 240` in `internal/server/server.go` makes 240 degrees LED 0.
+
+| LED | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Clock position | 8 | 9 | 10 | 11 | 12 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+
+Anything drawn as a dial, such as a countdown, wants a frame in dial order
+(index 0 at 12 o'clock) rotated onto the hardware by four places.
+
+---
+
 ## 2. Ring owners — priority ladder
 
 Highest layer that is active wins the physical paint. Lower layers still
